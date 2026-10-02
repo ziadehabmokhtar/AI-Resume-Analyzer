@@ -1,0 +1,2 @@
+async function api(path, options={}){options.headers={...(options.headers||{}),'Content-Type':'application/json'};if(localStorage.token)options.headers.Authorization='Bearer '+localStorage.token;const r=await fetch(path,options);let data={};try{data=await r.json()}catch{}if(r.status===401){localStorage.removeItem('token');if(!location.pathname.includes('login'))location='/login.html'}return data}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
